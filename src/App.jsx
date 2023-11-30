@@ -1,9 +1,10 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import AppCRUD from "./CRUD";
 
 function App() {
   return (
     <>
-      <h1>React App</h1>
+      <AppCRUD />
     </>
   );
 }
