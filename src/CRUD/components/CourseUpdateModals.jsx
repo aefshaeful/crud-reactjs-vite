@@ -1,23 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import PropTypes from "prop-types";
 
-const CourseCreateModals = ({ show, handleClose, handleSubmit }) => {
+const CourseUpdateModals = ({ show, handleClose, handleSubmit, data }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
   // Function untuk mengirim data course baru
   const submitData = () => {
-    const timeStamp = new Date().valueOf();
     const submitPayload = {
-      id: timeStamp,
-      title: title,
-      description: description,
+      id: data.id,
+      title,
+      description,
     };
 
     console.log("submit", submitPayload);
     handleSubmit(submitPayload);
   };
+
+  useEffect(() => {
+    setTitle(data.title);
+    setDescription(data.description);
+  }, [data]);
 
   return (
     <Modal show={show} onHide={handleClose}>
@@ -33,6 +37,7 @@ const CourseCreateModals = ({ show, handleClose, handleSubmit }) => {
               placeholder="course title"
               autoFocus
               onChange={(e) => setTitle(e.target.value)} //Untuk mengambil value dari input
+              defaultValue={data.title}
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
@@ -41,6 +46,7 @@ const CourseCreateModals = ({ show, handleClose, handleSubmit }) => {
               as="textarea"
               rows={3}
               onChange={(e) => setDescription(e.target.value)} //Untuk mengambil value dari input
+              defaultValue={data.description}
             />
           </Form.Group>
         </Form>
@@ -57,10 +63,11 @@ const CourseCreateModals = ({ show, handleClose, handleSubmit }) => {
   );
 };
 
-CourseCreateModals.propTypes = {
+export default CourseUpdateModals;
+
+CourseUpdateModals.propTypes = {
   show: PropTypes.bool.isRequired, // Assuming 'show' is a boolean
   handleClose: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  data: PropTypes.object.isRequired,
 };
-
-export default CourseCreateModals;
