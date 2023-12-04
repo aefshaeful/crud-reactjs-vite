@@ -2,7 +2,6 @@ import { Button, Modal } from "react-bootstrap";
 import PropTypes from "prop-types";
 
 const CourseDeleteModals = ({ show, handleClose, onAgree }) => {
-  
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>

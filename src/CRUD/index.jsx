@@ -39,7 +39,7 @@ export default function AppCRUD() {
 
   // Function untuk mengupdate data course dan di simpan dalam local storage
   const handleUpdateCourse = (payload) => {
-    const { id, ...others } = payload;
+    const { id, ...others } = payload; // Memisahkan id dari payload dan hanya mengambil data lainnya
     courseService.updateCourses(id, others);
     fetchCourses();
     handleCloseUpdateModal();
